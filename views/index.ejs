@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETRSOFT ODEV</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>API'den Alınan Veriler</h1>
+        <% if (data && data.length> 0) {
+            let displayedLevel1 = [];
+            let displayedLevel2 = [];
+            let currentIndex = 0;
+            let newIndex=0;
+            %>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Hesap Kodu</th>
+                        <th>Toplam Borç</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% data.forEach((item, index)=> {
+                        let level1 = item.level_1;
+                        let level2 = item.level_2;
+
+                        if (!displayedLevel1.includes(level1)) {
+                        displayedLevel1.push(level1);
+                        currentIndex=index;
+                        newIndex=currentIndex;
+                        %>
+                        <tr class="item-row" data-index="<%= index %>">
+                            <td class="plus" data-index="<%= index %>">+</td>
+                            <td>
+                                <%= level1 %>
+                            </td>
+                            <td>
+                                <%= item.borcu %>
+                            </td>
+                        </tr>
+                        <% } if (!displayedLevel2.includes(level2) && displayedLevel1.includes(level1)) {
+                            displayedLevel2.push(level2);
+                            newIndex++;
+                             %>
+                            <tr class="details-row" data-parent-index="<%= currentIndex %>" style="display: none;">
+                                <td class="pluss" data-index="<%= newIndex %>">++</td>
+                                <td>
+                                    <%= level2 %>
+                                </td>
+                                <td>
+                                    <%= item.borcu %>
+                                </td>
+                            </tr>         
+                            <% } %>
+                            <% if(!displayedLevel2.includes(item.hesap_kodu)){%>
+
+                            <tr class="more-details-row" more-parent-index="<%= newIndex %>" style="display: none;">
+                                <td></td>
+                                <td>
+                                    <%= item.hesap_kodu %>
+                                </td>
+                                <td>
+                                    <%= item.borcu %>
+                                </td>
+                            </tr>                        
+                        <%} }); %>
+                </tbody>
+            </table>
+            <% } else { %>
+                <p>Veri bulunamadı.</p>
+                <% } %>
+    </div>
+    <script src="/script.js"></script>
+
+</body>
+</html>

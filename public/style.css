@@ -1,0 +1,35 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    color: #333;
+}
+.container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+table {
+    width: 60%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th,
+td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+h1 {
+    color: #333;
+}
+
+.plus {
+    width: 20px;
+    cursor: pointer;
+}
